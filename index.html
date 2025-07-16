@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>구이가 풍무점 - 프리미엄 고기 전문점</title>
+
+<!-- 구글 폰트: Noto Sans KR (본문용), Nanum Myeongjo (헤더용) -->
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+
+<!-- Slick slider CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<style>
+  /* Reset & 기본 */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f9fafb;
+    color: #3a3a3a;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+  a {
+    color: #3b7d56;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  a:hover, a:focus {
+    color: #2f5d3e;
+    outline: none;
+  }
+
+  /* 헤더 */
+  header {
+    background: #ffffff;
+    padding: 24px 48px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 1100;
+  }
+  header h1 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #3b7d56;
+    letter-spacing: 2px;
+    cursor: default;
+    user-select: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  nav a {
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+  }
+  nav a:hover, nav a:focus {
+    border-color: #3b7d56;
+  }
+
+  /* 섹션 공통 */
+  section {
+    max-width: 1080px;
+    margin: 80px auto 100px;
+    padding: 0 24px;
+  }
+  section h2 {
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #3b7d56;
+    margin-bottom: 42px;
+    text-align: center;
+    letter-spacing: 1.8px;
+    text-shadow: 1px 1px 4px rgba(59,125,86,0.15);
+  }
+
+  /* 가게 소개 */
+  #about {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  #about img {
+    flex: 1 1 480px;
+    max-width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 6px 24px rgba(59,125,86,0.12);
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  #about img:hover {
+    transform: scale(1.05);
+  }
+  #about .about-text {
+    flex: 1 1 520px;
+    font-size: 1.15rem;
+    color: #4a4a4a;
+    line-height: 1.7;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* 주요 특징 카루셀 */
+  #features {
+    margin-top: 60px;
+  }
+  .feature-slider .feature-item {
+    background: #fff;
+    padding: 28px 22px 32px;
+    border-radius: 20px;
+    box-shadow: 0 5px 18px rgba(59,125,86,0.15);
+    text-align: center;
+    cursor: default;
+    user-select: none;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .feature-slider .feature-item:hover,
+  .feature-slider .slick-center .feature-item {
+    transform: scale(1.08);
+    box-shadow: 0 8px 28px rgba(59,125,86,0.3);
+    z-index: 10;
+  }
+  .feature-slider .feature-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 22px;
+    filter: drop-shadow(0 1px 1px rgba(59,125,86,0.1));
+  }
+  .feature-slider .feature-item h3 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: #2d5a38;
+    letter-spacing: 0.03em;
+  }
+  .feature-slider .feature-item p {
+    font-size: 1.05rem;
+    color: #555a50;
+    line-height: 1.45;
+  }
+
+  /* 메뉴 소개 */
+  #menu {
+    margin-top: 60px;
+  }
+  .menu-list {
+    display: flex;
+    justify-content: center;
+    gap: 44px;
+    flex-wrap: wrap;
+  }
+  .menu-item {
+    background: #fff;
+    border-radius: 20px;
+    width: 280px;
+    box-shadow: 0 5px 18px rgba(59,125,86,0.12);
+    overflow: hidden;
+    cursor: default;
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+    text-align: center;
+  }
+  .menu-item:hover {
+    box-shadow: 0 9px 28px rgba(43,147,87,0.3);
+    transform: translateY(-6px);
+  }
+  .menu-item img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-bottom: 4px solid #3b7d56;
+    border-radius: 20px 20px 0 0;
+  }
+  .menu-item .menu-info {
+    padding: 20px 26px;
+  }
+  .menu-item .menu-info h3 {
+    font-size: 1.4rem;
+    color: #2d5a38;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .menu-item .menu-info p {
+    font-size: 1rem;
+    color: #666a5f;
+    line-height: 1.35;
+  }
+
+  /* 매장 위치 */
+  #location {
+    margin-top: 60px;
+  }
+  #location .map-container {
+    max-width: 850px;
+    margin: 0 auto;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 8px 26px rgba(59,125,86,0.18);
+    transition: box-shadow 0.3s ease;
+  }
+  #location .map-container:hover {
+    box-shadow: 0 12px 40px rgba(59,125,86,0.25);
+  }
+  #location .map-container iframe {
+    width: 100%;
+    height: 470px;
+    border: 0;
+    display: block;
+    border-radius: 28px;
+  }
+
+  /* 예약 문의 */
+  #contact {
+    margin-top: 60px;
+  }
+  #contact .contact-info {
+    max-width: 580px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(59,125,86,0.14);
+    padding: 40px 40px;
+    font-size: 1.2rem;
+    color: #4a4a4a;
+    line-height: 1.65;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  #contact .contact-info strong {
+    color: #3b7d56;
+    font-weight: 700;
+    font-size: 1.35rem;
+  }
+  #contact .contact-info p {
+    margin: 18px 0 12px;
+  }
+  #contact .contact-info a {
+    font-weight: 700;
+    color: #2f5d3e;
+  }
+  #contact .contact-info a:hover {
+    text-decoration: underline;
+  }
+
+  /* 반응형 */
+  @media (max-width: 940px) {
+    #about {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .menu-list {
+      justify-content: center;
+    }
+  }
+  @media (max-width: 620px) {
+    header {
+      flex-direction: column;
+      padding: 24px 24px 12px;
+      gap: 16px;
+    }
+    nav ul {
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    section {
+      margin: 48px 20px 80px;
+    }
+    .menu-list {
+      gap: 28px;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>구이가 풍무점</h1>
+  <nav>
+    <ul>
+      <li><a href="#about">가게 소개</a></li>
+      <li><a href="#features">주요 특징</a></li>
+      <li><a href="#menu">메뉴 소개</a></li>
+      <li><a href="#location">매장 위치</a></li>
+      <li><a href="#contact">예약 문의</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 가게 소개 -->
+<section id="about" tabindex="-1" aria-label="가게 소개">
+  <h2>가게 소개</h2>
+  <img src="guiga.jpg" alt="구이가 풍무점 가게 내부 모습" />
+  <p class="about-text">
+    구이가 풍무점은 최상급 한우와 다양한 양념 갈비로 명성이 자자한 프리미엄 고기 전문점입니다.<br />
+    쾌적한 실내와 정성 어린 서비스로 고객님께 최고의 맛과 편안함을 제공합니다.<br />
+    가족, 친구, 연인과 함께 특별한 식사 시간을 즐겨보세요.
+  </p>
+</section>
+
+<!-- 주요 특징 -->
+<section id="features" tabindex="-1" aria-label="주요 특징">
+  <h2>주요 특징</h2>
+  <div class="feature-slider">
+    <article class="feature-item" tabindex="0">
+      <img src="samp.jpg" alt="프리미엄 삼겹살 사진" />
+      <h3>프리미엄 도드람 삼겹살</h3>
+      <p>도드람 으뜸 등급의 최고급 삼겹살을 사용합니다.</p>
+    </article>
+    <article class="feature-item" tabindex="0">
+      <img src="yang.jpg" alt="다양한 양념갈비 사진" />
+      <h3>특제 양념 갈비</h3>
+      <p>수제 양념으로 깊은 맛과 풍부한 향을 자랑합니다.</p>
+    </article>
+    <article class="feature-item" tabindex="0">
+      <img src="guigain.jpg" alt="아늑한 매장 내부 사진" />
+      <h3>단체 예약</h3>
+      <p>최대 130명까지 가족 및 단체 모임에 최적화된 공간을 제공합니다.</p>
+    </article>
+    <article class="feature-item" tabindex="0">
+      <img src="play.jpg" alt="친절한 서비스 사진" />
+      <h3>초대형 놀이방</h3>
+      <p>김포시 최대 규모의 어린이용 실내 놀이방이 있습니다.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 메뉴 소개 -->
+<section id="menu" tabindex="-1" aria-label="메뉴 소개">
+  <h2>메뉴 소개</h2>
+  <div class="menu-list">
+    <article class="menu-item" tabindex="0">
+      <img src="guksam.png" alt="한우 등심 사진" />
+      <div class="menu-info">
+        <h3>국내산 생고기세트</h3>
+        <p>삼겹 300g + 목살 300g + 프라이김치찌개</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="suset.jpg" alt="양념 갈비 사진" />
+      <div class="menu-info">
+        <h3>수제갈비세트</h3>
+        <p>국내산 냉장육으로 만든 수제갈비. 수제갈비 750g + 프라이김치찌개</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="somodum.jpg" alt="갈비살 사진" />
+      <div class="menu-info">
+        <h3>소모둠 세트</h3>
+        <p>소갈비살 150g + 마늘양념소갈비살 150g + 우삼겹 150g + 꽃갈비살 150g + 프라이김치찌개</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="tong.jpeg" alt="차돌박이 사진" />
+      <div class="menu-info">
+        <h3>통갈매기살</h3>
+        <p>직화로만 먹을 수 있는 제주산 통갈매기살</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="sangsamg.jpg" alt="돼지갈비 사진" />
+      <div class="menu-info">
+        <h3>국내산 생삼겹살</h3>
+        <p>도드람 으뜸 등급의 국내산 최고급 브랜드육</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="gukso.jpeg" alt="소세지 구이 사진" />
+      <div class="menu-info">
+        <h3>국내산수제돼지갈비</h3>
+        <p>국내산 냉장육으로 과일과 야채가 어우러진 양념돼지갈비</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="bu.png" alt="안창살 사진" />
+      <div class="menu-info">
+        <h3>점심특선 부대찌개(2인)</h3>
+        <p>정통 부대찌개의 맛. 좋은 재료와 적절한 풍미</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="moc.jpg" alt="토시살 사진" />
+      <div class="menu-info">
+        <h3>국내산생목살</h3>
+        <p>도드람 목살. 부드럽고 쫄깃한 식감이 특징</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="honey.jpeg" alt="육회 사진" />
+      <div class="menu-info">
+        <h3>벌집껍데기</h3>
+        <p>두툼한 돼지껍데기의 맛</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="hm.jpeg" alt="삼겹살 사진" />
+      <div class="menu-info">
+        <h3>황태물냉면</h3>
+        <p>.</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="mh.jpeg" alt="등갈비 사진" />
+      <div class="menu-info">
+        <h3>명태 회냉면</h3>
+        <p>.</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="hanu.jpg" alt="소고기 전골 사진" />
+      <div class="menu-info">
+        <h3>한우 육회</h3>
+        <p>신선한 한우의 맛을 느껴보세요</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="flour.png" alt="된장찌개 사진" />
+      <div class="menu-info">
+        <h3>꽃갈비살</h3>
+        <p>.</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="sog.jpeg" alt="밥과 반찬 세트 사진" />
+      <div class="menu-info">
+        <h3>소갈비살</h3>
+        <p>.</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="mayang.jpg" alt="야채 구이 사진" />
+      <div class="menu-info">
+        <h3>마늘양념소갈비살</h3>
+        <p>마늘과 특제 소스를 버무려 풍부한 감칠맛</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="usam.jpg" alt="갈비탕 사진" />
+      <div class="menu-info">
+        <h3>우삼겹(삼겹양지)</h3>
+        <p>.</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="fry.jpg" alt="냉면 사진" />
+      <div class="menu-info">
+        <h3>프라이 김치찌개</h3>
+        <p>김치찌개, 계란프라이, 구워먹는 치즈, 콘치즈</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="ju.png" alt="닭갈비 사진" />
+      <div class="menu-info">
+        <h3>셀프주먹밥</h3>
+        <p>흰색 단무지, 김가루 등이 들어있는 주먹밥</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="nunu.jpg" alt="누룽지 사진" />
+      <div class="menu-info">
+        <h3>누룽지</h3>
+        <p>손으로 저어가며 만든 진짜 누룽지</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="soso.jpg" alt="스테이크 사진" />
+      <div class="menu-info">
+        <h3>소고기 된장찌개</h3>
+        <p>신선한 재료가 가득 들어있는 된장찌개</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="do.jpg" alt="곱창 구이 사진" />
+      <div class="menu-info">
+        <h3>도시락</h3>
+        <p>추억의 도시락 그 자체</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="ge.png" alt="오징어 볶음 사진" />
+      <div class="menu-info">
+        <h3>계란찜</h3>
+        <p>우리보다 계란 많이 넣는 집 있음 나와봐!</p>
+      </div>
+    </article>
+    <article class="menu-item" tabindex="0">
+      <img src="neng.jpg" alt="목살 사진" />
+      <div class="menu-info">
+        <h3>후식 물냉면, 비빔냉면</h3>
+        <p>.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 매장 위치 -->
+<section id="location" tabindex="-1" aria-label="매장 위치">
+  <h2>매장 위치</h2>
+  <div class="map-container" role="region" aria-label="구이가 풍무점 위치 지도">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.097046225409!2d126.71791957572624!3d37.59987497202994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c8373c964f931%3A0x1b0d01e275bb5c30!2z6rWs7J206rCAIOq5gO2PrO2SjeustOygkA!5e0!3m2!1sko!2skr!4v1752644351798!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="구이가 풍무점 위치"
+    ></iframe>
+  </div>
+</section>
+
+<!-- 예약 문의 -->
+<section id="contact" tabindex="-1" aria-label="예약 문의">
+  <h2>예약 문의</h2>
+  <div class="contact-info">
+    <p>전화 예약 및 문의는 <strong>0507-1304-9276</strong>로 연락주세요.</p>
+    <p>운영시간: 매일 11:30 - 22:00 (연중무휴)</p>
+    <p>주소: 경기도 김포시 풍무동 풍무로 45-1 2층</p>
+    <p>이메일: <a href="mailto:contact@guiga-pungmu.kr">bb4118950@gmail.com</a></p>
+  </div>
+</section>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Slick slider JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('.feature-slider').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '48px',
+      autoplay: true,
+      autoplaySpeed: 4500,
+      dots: true,
+      arrows: true,
+      adaptiveHeight: true,
+      responsive: [
+        {
+          breakpoint: 940,
+          settings: {
+            slidesToShow: 2,
+            centerPadding: '32px',
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: {
+            slidesToShow: 1,
+            centerPadding: '0',
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+</body>
+</html>
